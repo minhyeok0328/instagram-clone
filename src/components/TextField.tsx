@@ -1,10 +1,17 @@
+import React, { InputHTMLAttributes, useState } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faMagnifyingGlass,
   faCircleXmark,
 } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+
+interface TextFieldType extends InputHTMLAttributes<HTMLInputElement> {
+  value: string;
+  setValue: Function;
+  search?: boolean;
+  focus?: boolean;
+}
 
 const Icon = styled.div`
   position: absolute;
@@ -20,7 +27,10 @@ const InputContainer = styled.div`
   background-color: ${({ theme }) => theme.search};
 `;
 
-const Input = styled.input`
+const Input = styled.input.attrs(({ search, focus }: TextFieldType) => ({
+  search,
+  focus,
+}))`
   background-color: transparent;
   width: 100%;
   height: 100%;
@@ -39,14 +49,14 @@ const ResetIcon = styled(Icon)`
   cursor: pointer;
 `;
 
-function TextField({ value, search, ...props }) {
+function TextField({ value, search, setValue, ...props }: TextFieldType) {
   const [focus, setFocus] = useState(false);
 
-  const inputOnFocus = (e) => {
+  const inputOnFocus = (e: React.FocusEvent<HTMLInputElement>) => {
     props.onFocus?.(e);
     setFocus(true);
   };
-  const inputOnBlur = (e) => {
+  const inputOnBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     props.onBlur?.(e);
 
     if (!value.length) {
@@ -54,7 +64,7 @@ function TextField({ value, search, ...props }) {
     }
   };
   const resetInput = () => {
-    props.reset?.();
+    setValue('');
     setFocus(false);
   };
 

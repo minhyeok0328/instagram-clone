@@ -8,10 +8,6 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
-  body {
-    background: ${({ theme }) => theme.background};
-  }
-
   a {
     color: inherit;
     text-decoration: none;
