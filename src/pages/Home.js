@@ -1,18 +1,12 @@
-import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faCamera } from '@fortawesome/free-solid-svg-icons';
-
-const Text = styled.p`
-  color: ${({ theme }) => theme.primary};
-  background-color: ${({ theme }) => theme.background};
-`;
+import TextField from '../components/TextField';
+import useInput from '../hooks/useInput';
 
 function Home() {
+  const input = useInput('');
+
   return (
     <div>
-      <FontAwesomeIcon icon={faCamera} />
-      <FontAwesomeIcon icon={faMagnifyingGlass} />
-      <Text>안녕</Text>
+      <TextField {...input} placeholder='검색' />
     </div>
   );
 }
