@@ -3,11 +3,7 @@
   "compilerOptions": {
     "target": "es6",
     "removeComments": false,
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -22,8 +18,5 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": [
-    "src",
-    "@types/global.d.ts"
-  ]
+  "include": ["src", "@types/global.d.ts"]
 }
