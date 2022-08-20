@@ -1,21 +1,16 @@
 interface DefaultSpec {
-  theme: Pick<
-    BaseTheme['theme'],
-    'background' | 'font' | 'search' | 'header' | 'colors'
-  >;
+  colors: Record<string, string>;
   space: BaseTheme['space'];
 }
 
 const defaultThemeSpec: DefaultSpec = {
-  theme: {
+  colors: {
     background: '#fafafa',
     font: '#262626',
     search: '#efefef',
     header: '#ffffff',
-    colors: {
-      white: '#ffffff',
-      black: '#000000',
-    },
+    white: '#ffffff',
+    black: '#000000',
   },
   space: {
     xl: '40px',
@@ -27,8 +22,8 @@ const defaultThemeSpec: DefaultSpec = {
 };
 
 const lightTheme: BaseTheme = {
-  theme: {
-    ...defaultThemeSpec.theme,
+  colors: {
+    ...defaultThemeSpec.colors,
     background: '#fafafa',
     font: '#262626',
     search: '#efefef',
@@ -40,8 +35,8 @@ const lightTheme: BaseTheme = {
 };
 
 const darkTheme: BaseTheme = {
-  theme: {
-    ...defaultThemeSpec.theme,
+  colors: {
+    ...defaultThemeSpec.colors,
     background: '#121212',
     font: '#fafafa',
     search: '#262626',

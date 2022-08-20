@@ -6,7 +6,7 @@ import IconNav from './IconNav';
 import { Link } from 'react-router-dom';
 const HeaderContainer = styled.div`
   height: 60px;
-  background-color: : ${({ theme }) => theme.header};
+  background-color: : ${({ theme }) => theme.colors.header};
   display: flex;
   justify-content: center;
   flex: 1 0 auto;
@@ -31,7 +31,7 @@ const Header = styled.div`
   width: 100%;
   height: 60px;
   align-items: center;
-  border-bottom: 1px solid ${({ theme }) => theme.border};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
 `;
 function BaseHeader() {
   const search = useInput('');

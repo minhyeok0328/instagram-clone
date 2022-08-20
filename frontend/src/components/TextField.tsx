@@ -24,7 +24,7 @@ const InputContainer = styled.div`
   width: 268px;
   height: 36px;
   border-radius: 8px;
-  background-color: ${({ theme }) => theme.search};
+  background-color: ${({ theme }) => theme.colors.search};
 `;
 
 const Input = styled.input.attrs(({ search, focus }: TextFieldType) => ({
