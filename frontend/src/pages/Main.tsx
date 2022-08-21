@@ -1,13 +1,10 @@
-import TextField from '@components/TextField';
-import useInput from '@hooks/useInput';
+import BaseMain from '@components/BaseMain';
 
 function Main() {
-  const input = useInput('');
-
   return (
-    <div>
-      <TextField search={true} placeholder="hello?" {...input} />
-    </div>
+    <>
+      <BaseMain />
+    </>
   );
 }
 
