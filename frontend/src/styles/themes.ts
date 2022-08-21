@@ -11,6 +11,7 @@ const defaultThemeSpec: DefaultSpec = {
     header: '#ffffff',
     white: '#ffffff',
     black: '#000000',
+    button: '#0095f6',
   },
   space: {
     xl: '40px',
@@ -28,6 +29,7 @@ const lightTheme: BaseTheme = {
     font: '#262626',
     search: '#efefef',
     header: '#ffffff',
+    button: '#0095f6',
   },
   space: {
     ...defaultThemeSpec.space,
@@ -41,6 +43,7 @@ const darkTheme: BaseTheme = {
     font: '#fafafa',
     search: '#262626',
     header: '#000000',
+    button: '#0095f6',
   },
   space: {
     ...defaultThemeSpec.space,
