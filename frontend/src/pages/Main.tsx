@@ -1,4 +1,4 @@
-import BaseMain from '@components/BaseMain';
+import BaseMain from '@components/MainPage/BaseMain';
 
 function Main() {
   return (
