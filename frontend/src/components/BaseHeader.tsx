@@ -6,7 +6,6 @@ import IconNav from './IconNav';
 import { Link } from 'react-router-dom';
 const HeaderContainer = styled.div`
   height: 60px;
-  background-color: : ${({ theme }) => theme.colors.header};
   display: flex;
   justify-content: center;
   flex: 1 0 auto;

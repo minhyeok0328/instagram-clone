@@ -10,14 +10,19 @@ import {
 import { Link } from 'react-router-dom';
 const Icon = styled.div`
   margin-left: 22px;
-  > svg {
-    height: 24px;
-    width: 24px;
+  height: 24px;
+  width: 24px;
+  > a > {
+    svg {
+      height: 100%;
+      width: 100%;
+    }
   }
 `;
 const Nav = styled.nav`
   display: flex;
   padding-left: 24px;
+  flex: 1 0 127px;
 `;
 function IconNav() {
   return (
