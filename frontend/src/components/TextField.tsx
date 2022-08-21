@@ -20,11 +20,11 @@ const Icon = styled.div`
 `;
 
 const InputContainer = styled.div`
+  background-color: ${({ theme }) => theme.colors.search};
   position: relative;
   width: 268px;
   height: 36px;
   border-radius: 8px;
-  background-color: ${({ theme }) => theme.colors.search};
 `;
 
 const Input = styled.input.attrs(({ search, focus }: TextFieldType) => ({
@@ -34,7 +34,7 @@ const Input = styled.input.attrs(({ search, focus }: TextFieldType) => ({
   background-color: transparent;
   width: 100%;
   height: 100%;
-  padding: 0 12px;
+  padding: 0 16px;
   font-size: 16px;
   ${({ search }) => search && `margin-left: 20px;`}
   ${({ focus }) => focus && `margin-left: 0px;`}
@@ -51,7 +51,6 @@ const ResetIcon = styled(Icon)`
 
 function TextField({ value, search, setValue, ...props }: TextFieldType) {
   const [focus, setFocus] = useState(false);
-
   const inputOnFocus = (e: React.FocusEvent<HTMLInputElement>) => {
     props.onFocus?.(e);
     setFocus(true);
