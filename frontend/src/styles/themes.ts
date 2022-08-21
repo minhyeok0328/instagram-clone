@@ -12,13 +12,14 @@ const defaultThemeSpec: DefaultSpec = {
     white: '#ffffff',
     black: '#000000',
     button: '#0095f6',
+    line: '#dbdbdb',
   },
   space: {
     xl: '40px',
     lg: '20px',
-    md: '12px',
-    sm: '5px',
-    xs: '2px',
+    md: '16px',
+    sm: '8px',
+    xs: '4px',
   },
 };
 
@@ -30,6 +31,7 @@ const lightTheme: BaseTheme = {
     search: '#efefef',
     header: '#ffffff',
     button: '#0095f6',
+    line: '#dbdbdb',
   },
   space: {
     ...defaultThemeSpec.space,
