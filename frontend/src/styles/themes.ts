@@ -13,9 +13,10 @@ const defaultThemeSpec: DefaultSpec = {
     black: '#000000',
     button: '#0095f6',
     line: '#dbdbdb',
+    secondfont: '#8E8E8E',
   },
   space: {
-    xl: '40px',
+    xl: '30px',
     lg: '20px',
     md: '16px',
     sm: '8px',
@@ -32,6 +33,7 @@ const lightTheme: BaseTheme = {
     header: '#ffffff',
     button: '#0095f6',
     line: '#dbdbdb',
+    secondfont: '#8E8E8E',
   },
   space: {
     ...defaultThemeSpec.space,
