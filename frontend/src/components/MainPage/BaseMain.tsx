@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import MainList from '@components/MainPage/MainList';
+import MainList from '@components/MainPage/NoFollow/MainList';
+import FollowerList from '@components/MainPage/HaveFollow/FollowerList';
 const Main = styled.main`
   background-color: ${({ theme }) => theme.colors.background};
   display: flex;
@@ -15,12 +16,28 @@ const MaincContainer = styled.section`
   margin: auto;
   margin-top: ${({ theme }) => theme.space.md};
 `;
+const MainTitle = styled.h4`
+  font-size: 16px;
+  font-weight: bold;
+`;
+const Maincontent = styled.div`
+  margin-top: ${({ theme }) => theme.space.sm};
+  border: 1px solid ${({ theme }) => theme.colors.line};
+  background-color: ${({ theme }) => theme.colors.white};
+  border-radius: 4px;
+`;
 function BaseMain() {
   return (
     <Main>
       <div>
         <MaincContainer>
-          <MainList></MainList>
+          <MainTitle>회원님을 위한 추천</MainTitle>
+          <Maincontent>
+            <MainList />
+          </Maincontent>
+          <Maincontent>
+            <FollowerList />
+          </Maincontent>
         </MaincContainer>
       </div>
     </Main>
