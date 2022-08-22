@@ -25,6 +25,9 @@ const InputContainer = styled.div`
   width: 268px;
   height: 36px;
   border-radius: 8px;
+  @media (max-width: 640px) {
+    display: none;
+  }
 `;
 
 const Input = styled.input.attrs(({ search, focus }: TextFieldType) => ({

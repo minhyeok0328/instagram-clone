@@ -30,7 +30,7 @@ const Header = styled.div`
   width: 100%;
   height: 60px;
   align-items: center;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.line};
 `;
 function BaseHeader() {
   const search = useInput('');
@@ -43,12 +43,8 @@ function BaseHeader() {
             <InstagramLogo />
           </Link>
         </div>
-        <div>
-          <TextField {...search} placeholder="검색" search={true} />
-        </div>
-        <div>
-          <IconNav />
-        </div>
+        <TextField {...search} placeholder="검색" search={true} />
+        <IconNav />
       </HeaderContainer>
     </Header>
   );

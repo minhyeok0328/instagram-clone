@@ -23,6 +23,9 @@ const Nav = styled.nav`
   display: flex;
   padding-left: 24px;
   flex: 1 0 127px;
+  @media (max-width: 400px) {
+    display: none;
+  }
 `;
 function IconNav() {
   return (
