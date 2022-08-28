@@ -3,6 +3,7 @@ import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 import FollowerListFooter from '@components/MainPage/HaveFollow/FollowerListFooter';
 import useInput from '@hooks/useInput';
+
 const ListHeader = styled.div`
   display: flex;
   justify-content: space-between;
