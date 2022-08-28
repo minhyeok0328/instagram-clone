@@ -50,35 +50,6 @@ const ListFooterInput = styled.section`
     }
   }
 `;
-const ListFooterInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  > div {
-    padding: 0 ${({ theme }) => theme.space.md};
-    font-size: 14px;
-    margin-bottom: ${({ theme }) => theme.space.sm};
-    :nth-child(1) {
-      font-weight: bold;
-    }
-    :nth-child(2) {
-      display: flex;
-      > div {
-        font-weight: bold;
-      }
-      > span {
-        color: ${({ theme }) => theme.colors.secondfont};
-      }
-    }
-    :nth-child(3) {
-      color: ${({ theme }) => theme.colors.secondfont};
-    }
-    :nth-child(4) {
-      margin-bottom: ${({ theme }) => theme.space.md};
-      color: ${({ theme }) => theme.colors.secondfont};
-      font-size: 10px;
-    }
-  }
-`;
 interface TextFieldType extends InputHTMLAttributes<HTMLInputElement> {
   value: string;
   setValue: Function;
@@ -92,19 +63,6 @@ function FollowerListFooter({ value, setValue, ...props }: TextFieldType) {
   }
   return (
     <>
-      <ListFooterInfo>
-        <div>좋아요 300,000개</div>
-        <div>
-          <div>username</div>
-          <span>&nbsp;subject...&nbsp;더보기</span>
-        </div>
-        <div>
-          댓글 <span>4000</span>개 모두 보기
-        </div>
-        <div>
-          <span>1시간</span>전
-        </div>
-      </ListFooterInfo>
       <ListFooterInput>
         <div>
           <div>

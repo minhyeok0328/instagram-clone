@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import MainList from '@components/MainPage/NoFollow/MainList';
-import FollowerList from '@components/MainPage/HaveFollow/FollowerList';
-import useFakeFeedList from "@hooks/useFakeFeedList";
+import Feed from '@components/MainPage/HaveFollow/Feed';
+import useFakeFeedList from '@hooks/useFakeFeedList';
 const Main = styled.main`
   background-color: ${({ theme }) => theme.colors.background};
   display: flex;
@@ -40,7 +40,7 @@ function BaseMain() {
           </Maincontent>
           <Maincontent>
             {fakeFeedList.map((feedItem, key) => (
-              <FollowerList {...feedItem} key={key} />
+              <Feed {...feedItem} key={key} />
             ))}
           </Maincontent>
         </MaincContainer>
