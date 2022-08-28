@@ -4,6 +4,7 @@ import TextField from '@components/TextField';
 import { ReactComponent as InstagramLogo } from '@assets/images/logo.svg';
 import IconNav from './IconNav';
 import { Link } from 'react-router-dom';
+
 const HeaderContainer = styled.div`
   height: 60px;
   display: flex;

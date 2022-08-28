@@ -46,7 +46,8 @@ const UserIcon = styled.div`
     margin: auto;
   }
 `;
-function FollowerList() {
+
+function FollowerList(props: Feed) {
   const reply = useInput('');
   return (
     <>
@@ -56,7 +57,7 @@ function FollowerList() {
             <UserIcon>
               <div></div>
             </UserIcon>
-            <div>username</div>
+            <div>{props.userName}</div>
           </div>
           <div>
             <button>
