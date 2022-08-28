@@ -37,3 +37,6 @@ lerna-debug.log*
 # key file
 *.pem
 *.ppk
+
+# static file
+static/
