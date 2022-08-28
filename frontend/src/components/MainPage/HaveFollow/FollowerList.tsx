@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 import FollowerListFooter from '@components/MainPage/HaveFollow/FollowerListFooter';
-const ListContent = styled.div``;
+import useInput from '@hooks/useInput';
 const ListHeader = styled.div`
   display: flex;
   justify-content: space-between;
@@ -46,9 +46,10 @@ const UserIcon = styled.div`
   }
 `;
 function FollowerList() {
+  const reply = useInput('');
   return (
     <>
-      <ListContent>
+      <div>
         <ListHeader>
           <div>
             <UserIcon>
@@ -66,9 +67,9 @@ function FollowerList() {
           <div></div>
         </ListMain>
         <section>
-          <FollowerListFooter />
+          <FollowerListFooter {...reply} />
         </section>
-      </ListContent>
+      </div>
     </>
   );
 }
