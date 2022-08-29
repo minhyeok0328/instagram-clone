@@ -1,9 +1,11 @@
-import BaseMain from '@components/MainPage/BaseMain';
-
+import BaseMain from '@components/BaseMain';
+import { Route, Routes } from 'react-router-dom';
 function Main() {
   return (
     <>
-      <BaseMain />
+      <Routes>
+        <Route path="/" element={<BaseMain />}></Route>
+      </Routes>
     </>
   );
 }
