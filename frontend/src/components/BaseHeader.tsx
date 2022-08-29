@@ -32,6 +32,7 @@ const Header = styled.div`
   height: 60px;
   align-items: center;
   border-bottom: 1px solid ${({ theme }) => theme.colors.line};
+  background: ${({ theme }) => theme.colors.white};
 `;
 function BaseHeader() {
   const search = useInput('');
