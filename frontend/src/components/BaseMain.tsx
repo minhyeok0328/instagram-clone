@@ -1,42 +1,45 @@
 import styled from 'styled-components';
-import MainList from '@components/MainPage/NoFollow/MainList';
-import Feed from '@components/MainPage/HaveFollow/Feed';
+import Feed from '@components/Feed';
 import useFakeFeedList from '@hooks/useFakeFeedList';
+import Follow from '@components/Follow';
+import Sidemenu from '@components/Sidemenu';
 const Main = styled.main`
   background-color: ${({ theme }) => theme.colors.background};
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
+  > div {
+    display: flex;
+    max-width: 820px;
+    margin: auto;
+    margin-top: ${({ theme }) => theme.space.md};
+  }
   align-items: stretch;
   margin: 0;
   padding: 0;
 `;
 const MaincContainer = styled.section`
-  max-width: 470px;
   width: 100%;
   margin: auto;
-  margin-top: ${({ theme }) => theme.space.md};
+  @media (min-width: 1000px) {
+    margin-right: ${({ theme }) => theme.space.md};
+  }
 `;
-const MainTitle = styled.h4`
-  font-size: 16px;
-  font-weight: bold;
-`;
+// const MainTitle = styled.h4`
+//   font-size: 16px;
+//   font-weight: bold;
+// `;
 const Maincontent = styled.div`
+  margin: auto;
   margin-top: ${({ theme }) => theme.space.sm};
-  border: 1px solid ${({ theme }) => theme.colors.line};
-  background-color: ${({ theme }) => theme.colors.white};
-  border-radius: 4px;
+  border-radius: 8px;
+  max-width: 470px;
 `;
 function BaseMain() {
   const fakeFeedList = useFakeFeedList();
-  console.log('fakeFeedList', fakeFeedList);
   return (
     <Main>
       <div>
         <MaincContainer>
-          <MainTitle>회원님을 위한 추천</MainTitle>
           <Maincontent>
-            <MainList />
+            <Follow />
           </Maincontent>
           <Maincontent>
             {fakeFeedList.map((feedItem, key) => (
@@ -44,6 +47,7 @@ function BaseMain() {
             ))}
           </Maincontent>
         </MaincContainer>
+        <Sidemenu />
       </div>
     </Main>
   );
