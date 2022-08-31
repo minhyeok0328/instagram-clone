@@ -6,6 +6,8 @@ function FollowList() {
     padding-left: ${({ theme }) => theme.space.md};
     border: 1px solid ${({ theme }) => theme.colors.line};
     background-color: ${({ theme }) => theme.colors.white};
+    max-width: 470px;
+    margin: auto;
   `;
   const UserIcon = styled.div`
     margin-right: ${({ theme }) => theme.space.md};

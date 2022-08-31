@@ -2,13 +2,11 @@ import SidemenuItem from '@components/SidemenuItem';
 import styled from 'styled-components';
 const SidemenuContainer = styled.div`
   width: 100%;
-  position: absolute;
   top: 20px;
 `;
 const Menu = styled.div`
   max-width: 320px;
   width: 100%;
-  position: relative;
 `;
 const UserIcon = styled.div`
   margin-right: ${({ theme }) => theme.space.md};
@@ -24,7 +22,7 @@ const Profile = styled.div`
   align-items: center;
   flex: 0 0 auto;
   margin-top: ${({ theme }) => theme.space.md};
-  margin-bottom: ${({ theme }) => theme.space.sm};
+  margin-bottom: ${({ theme }) => theme.space.md};
   > div:nth-child(2) {
     flex: 1 1 auto;
     margin-left: ${({ theme }) => theme.space.xs};
@@ -38,7 +36,7 @@ const ProfileButton = styled.div`
 const SideRecommend = styled.div``;
 const SideTitle = styled.div`
   display: flex;
-  padding: ${({ theme }) => theme.space.xs} ${({ theme }) => theme.space.md};
+  padding: ${({ theme }) => theme.space.sm} ${({ theme }) => theme.space.md};
   font-weight: 700;
   > div:nth-child(1) {
     font-size: 14px;
