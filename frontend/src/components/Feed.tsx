@@ -84,13 +84,15 @@ const ListFooterInfo = styled.div`
 function FollowerList(props: Feed) {
   const reply = useInput('');
   const nowdate = dayjs(Date(), 'YYYY-MM-DD HH:mm:ss.SSS');
-  function Dateunit(unit: 'w' | 'd' | 'h') {
-    return nowdate.diff(props.registerDate, unit);
+  const week = nowdate.diff(props.registerDate, 'w');
+  const day = nowdate.diff(props.registerDate, 'd');
+  const hour = nowdate.diff(props.registerDate, 'h');
+  let DayCount = `${week}주전`;
+  if (!week) {
+    DayCount = `${day}일전`;
   }
-  let DayCount = `${Dateunit('w')}주전`;
-  if (!Dateunit('w')) {
-    DayCount = `${Dateunit('d')}일전`;
-    if (!Dateunit('d')) DayCount = `${Dateunit('h')}시간전`;
+  if (!day) {
+    DayCount = `${hour}시간전`;
   }
   return (
     <>
