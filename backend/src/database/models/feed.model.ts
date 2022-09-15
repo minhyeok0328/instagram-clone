@@ -1,9 +1,18 @@
-import { Column, Model, PrimaryKey, Table } from 'sequelize-typescript';
+import {
+  AutoIncrement,
+  Column,
+  Model,
+  NotNull,
+  PrimaryKey,
+  Table,
+} from 'sequelize-typescript';
 
 @Table
 export class Feed extends Model {
   @PrimaryKey
-  @Column
+  @AutoIncrement
+  @NotNull
+  @Column({ allowNull: false })
   id: number;
 
   @Column
