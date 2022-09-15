@@ -1,18 +1,9 @@
-import {
-  AutoIncrement,
-  Column,
-  Model,
-  NotNull,
-  PrimaryKey,
-  Table,
-} from 'sequelize-typescript';
+import { Column, Model, PrimaryKey, Table } from 'sequelize-typescript';
 
 @Table
 export class Member extends Model {
-  @Column
   @PrimaryKey
-  @AutoIncrement
-  @NotNull
+  @Column
   id: number;
 
   @Column

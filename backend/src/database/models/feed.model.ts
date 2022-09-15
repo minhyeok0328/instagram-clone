@@ -1,18 +1,9 @@
-import {
-  AutoIncrement,
-  Column,
-  Model,
-  NotNull,
-  PrimaryKey,
-  Table,
-} from 'sequelize-typescript';
+import { Column, Model, PrimaryKey, Table } from 'sequelize-typescript';
 
 @Table
 export class Feed extends Model {
-  @Column
   @PrimaryKey
-  @AutoIncrement
-  @NotNull
+  @Column
   id: number;
 
   @Column
@@ -28,7 +19,7 @@ export class Feed extends Model {
   content: string;
 
   @Column
-  uploadImages: JSON;
+  uploadImages: string;
 
   @Column
   email: string;
@@ -40,5 +31,5 @@ export class Feed extends Model {
   updateDate: Date;
 
   @Column
-  like: number;
+  likeCount: number;
 }

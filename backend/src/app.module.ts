@@ -3,11 +3,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { APP_FILTER } from '@nestjs/core';
 import { NotFoundExceptionFilter } from './filter/not-found-exception-filter';
-import { GqlModule } from './gql/gql.module';
+import { GraphqlModule } from './graphql/graphql.module';
 import { DatabaseModule } from './database/database.module';
 
 @Module({
-  imports: [GqlModule, DatabaseModule],
+  imports: [GraphqlModule, DatabaseModule],
   controllers: [AppController],
   providers: [
     AppService,

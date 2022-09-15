@@ -24,6 +24,6 @@ CREATE TABLE `feed` (
 	`uploadImages` JSON,
 	`registerDate` datetime NOT NULL,
 	`updateDate` datetime DEFAULT NULL,
-	`like` int(11),
+	`likeCount` int(11),
 	PRIMARY KEY (`id`)
 );
