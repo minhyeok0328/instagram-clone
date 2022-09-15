@@ -1,14 +1,16 @@
 version: '3'
 
 services:
-  db:
-    image: postgres:latest
+  database:
+    image: mariadb:latest
     ports:
-      - 5432:5432
+      - 3306:3306
     expose:
       - 3306
     volumes:
-      - ./database/data:/var/lib/postgresql/data
+      - ./database/conf.d:/etc/mysql/conf.d
+      - ./database/data:/var/lib/mysql
+      - ./database/init:/docker-entrypoint-initdb.d
     env_file: .env
     environment:
       TZ: Asia/Seoul

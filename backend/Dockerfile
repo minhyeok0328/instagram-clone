@@ -1,3 +1,3 @@
-FROM postgres:latest
+FROM mariadb:latest
 
-EXPOSE 5432
+EXPOSE 3306
