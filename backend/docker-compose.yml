@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  database:
+    image: mariadb:latest
+    ports:
+      - 3306:3306
+    expose:
+      - 3306
+    volumes:
+      - ./database/conf.d:/etc/mysql/conf.d
+      - ./database/data:/var/lib/mysql
+      - ./database/init:/docker-entrypoint-initdb.d
+    env_file: .env
+    environment:
+      TZ: Asia/Seoul
+    networks:
+      - default
+    restart: always
+
+networks:
+  default:

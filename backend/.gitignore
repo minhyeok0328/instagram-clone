@@ -40,3 +40,6 @@ lerna-debug.log*
 
 # static file
 static/
+
+# docker databse volumn mount file
+database/data/*
