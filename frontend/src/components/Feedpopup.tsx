@@ -79,11 +79,7 @@ const Comment = styled.section`
   display: flex;
   flex-direction: column;
 `;
-const CommentContent = styled.div`
-  flex-grow: 1;
-  > ul {
-  }
-`;
+const CommentContent = styled.div``;
 function Feedpopup() {
   const reply = useInput('');
   return (
