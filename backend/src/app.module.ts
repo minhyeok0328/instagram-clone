@@ -4,9 +4,10 @@ import { AppService } from './app.service';
 import { APP_FILTER } from '@nestjs/core';
 import { NotFoundExceptionFilter } from './filter/not-found-exception-filter';
 import { GqlModule } from './gql/gql.module';
+import { DatabaseModule } from './database/database.module';
 
 @Module({
-  imports: [GqlModule],
+  imports: [GqlModule, DatabaseModule],
   controllers: [AppController],
   providers: [
     AppService,
