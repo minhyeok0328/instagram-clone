@@ -38,7 +38,6 @@ const CardContent = styled.div`
     }
   }
   div:nth-child(5) {
-    margin-left: ${({ theme }) => theme.space.sm};
     display: flex;
     align-items: center;
     button {
@@ -80,7 +79,7 @@ const Clolse = styled.div`
   padding: ${({ theme }) => theme.space.sm};
 `;
 
-function RecommendCardItem() {
+function RecommendCardItem(props: Feed) {
   return (
     <Card>
       <div>
@@ -91,9 +90,9 @@ function RecommendCardItem() {
           <UserIcon>
             <div></div>
           </UserIcon>
-          <div>이승민은 일해라</div>
+          <div>{props.userId}</div>
           <div>
-            <span>추천이유</span>
+            <span>이승민은 일해라</span>
           </div>
           <div>
             <button>

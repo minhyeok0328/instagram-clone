@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import RecommendCard from '@components/RecommendCard';
+import useListCount from '@hooks/useListCount';
 const Main = styled.main`
   background-color: ${({ theme }) => theme.colors.background};
   > div {
@@ -30,7 +31,7 @@ const Maincontent = styled.div`
   margin: auto;
 `;
 function BaseMain() {
-  // const fakeFeedList = useFakeFeedList();
+  const ListCount = useListCount(0);
   return (
     <Main>
       <div>
@@ -41,7 +42,7 @@ function BaseMain() {
             ))}
           </Maincontent> */}
           <Maincontent>
-            <RecommendCard></RecommendCard>
+            <RecommendCard {...ListCount}></RecommendCard>
           </Maincontent>
         </MaincContainer>
         {/* <Sidemenu /> */}
