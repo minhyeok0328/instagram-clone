@@ -1,5 +1,7 @@
 import SidemenuItem from '@components/SidemenuItem';
+import useFakeFeedList from '@hooks/useFakeFeedList';
 import styled from 'styled-components';
+
 const SidemenuContainer = styled.div`
   width: 100%;
   top: 20px;
@@ -7,6 +9,9 @@ const SidemenuContainer = styled.div`
 const Menu = styled.div`
   max-width: 320px;
   width: 100%;
+  @media (max-width: 1000px) {
+    display: none;
+  }
 `;
 const UserIcon = styled.div`
   margin-right: ${({ theme }) => theme.space.md};
@@ -48,6 +53,7 @@ const SideTitle = styled.div`
   }
 `;
 function Sidemenu() {
+  const fakeFeedList = useFakeFeedList();
   return (
     <Menu>
       <SidemenuContainer>
@@ -63,7 +69,9 @@ function Sidemenu() {
           <div>모두 보기</div>
         </SideTitle>
         <SideRecommend>
-          <SidemenuItem />
+          {fakeFeedList.map((feedItem, key) => (
+            <SidemenuItem {...feedItem} key={key} />
+          ))}
         </SideRecommend>
       </SidemenuContainer>
     </Menu>

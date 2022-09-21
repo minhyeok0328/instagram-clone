@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 const SideRecommendItme = styled.div`
   display: flex;
   align-items: center;
@@ -8,6 +9,7 @@ const SideRecommendItme = styled.div`
     >div: nth-child(1) {
       font-size: 16px;
       font-weight: bold;
+      padding-bottom: 4px;
     }
     >div: nth-child(2) {
       font-size: 14px;
@@ -30,7 +32,7 @@ const UserIcon = styled.div`
     border-radius: 50%;
   }
 `;
-function SidemenuItem() {
+function SidemenuItem(props: Feed) {
   return (
     <SideRecommendItme>
       <UserIcon>
@@ -38,10 +40,10 @@ function SidemenuItem() {
       </UserIcon>
       <div>
         <div>
-          <div>usernickname</div>
+          <div>{props.userId}</div>
         </div>
         <div>
-          <div>username</div>
+          <div>이쯤되면 진짜로 일해라 이승민</div>
         </div>
       </div>
       <div>
