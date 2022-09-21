@@ -11,13 +11,9 @@ const CardList = styled.div`
 `;
 const Recommend = styled.div`
   position: relative;
-  height: 300px;
-  background-color: ${({ theme }) => theme.colors.white};
   margin: auto;
   overflow: hidden;
   padding: ${({ theme }) => theme.space.lg} 0;
-  border: 1px solid ${({ theme }) => theme.colors.line};
-  border-radius: 4px;
 `;
 const CardHeader = styled.div`
   margin: 0 ${({ theme }) => theme.space.lg} ${({ theme }) => theme.space.md}
@@ -48,7 +44,6 @@ const Prevbtn = styled.div`
   width: 24px;
   height: 24px;
   top: 50%;
-  z-index: 1;
   margin: ${({ theme }) => theme.space.sm};
   overflow: hidden;
   white-space: nowrap;
@@ -60,7 +55,7 @@ interface List {
   Count: Number;
   setCount: Function;
 }
-function RecommendCard({ Count, setCount, ...props }: List) {
+function RecommendCard({ Count, setCount }: List) {
   const [nextbtn, Setnext] = useState(true);
   const [prevbtn, Setprev] = useState(false);
   const fakeFeedList = useFakeFeedList();
