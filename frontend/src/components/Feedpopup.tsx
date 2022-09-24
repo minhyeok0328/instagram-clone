@@ -3,13 +3,20 @@ import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 import FollowerListReply from '@components/FeedReply';
 import useInput from '@hooks/useInput';
+import useListCount from '@hooks/useListCount';
+import FeedItem from '@components/FeedItem';
+import { useParams } from 'react-router-dom';
+
 const FeedContent = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.line};
   background-color: ${({ theme }) => theme.colors.white};
   display: flex;
-  width: 90%;
   margin: auto;
   justify-content: center;
+  position: fixed;
+  top: 30%;
+  left: 10%;
+  width: fit-content;
 `;
 const ListHeader = styled.div`
   display: flex;
@@ -41,11 +48,8 @@ const ListHeader = styled.div`
 const ListMain = styled.div`
   display: flex;
   width: 100%;
-  > div {
-    flex-grow: 1;
-    background-color: ${({ theme }) => theme.colors.black};
-    height: 800px;
-  }
+  overflow: hidden;
+  max-width: 640px;
 `;
 const UserIcon = styled.div`
   margin-right: ${({ theme }) => theme.space.md};
@@ -79,14 +83,18 @@ const Comment = styled.section`
   display: flex;
   flex-direction: column;
 `;
-const CommentContent = styled.div``;
+const CommentContent = styled.div`
+  flex: 1 auto;
+`;
 function Feedpopup() {
   const reply = useInput('');
+  let { id } = useParams();
+  const ListCount = useListCount(0);
   return (
     <>
       <FeedContent>
         <ListMain>
-          <div></div>
+          <FeedItem {...ListCount}></FeedItem>
         </ListMain>
         <Comment>
           <ListHeader>
@@ -94,7 +102,7 @@ function Feedpopup() {
               <UserIcon>
                 <div></div>
               </UserIcon>
-              <div>username</div>
+              <div>username,{id}</div>
             </div>
             <div>
               <button>

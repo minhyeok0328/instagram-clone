@@ -21,6 +21,9 @@ const GlobalStyle = createGlobalStyle`
   #content {
     padding-top: 60px;
   }
+  body{
+    background-color: #fafafa;
+  }
 `;
 
 export default GlobalStyle;
