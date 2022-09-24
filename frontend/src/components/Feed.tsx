@@ -4,10 +4,13 @@ import styled from 'styled-components';
 import FollowerListReply from '@components/FeedReply';
 import useInput from '@hooks/useInput';
 import dayjs from 'dayjs';
+import FeedItem from '@components/FeedItem';
+import useListCount from '@hooks/useListCount';
+import { Link } from 'react-router-dom';
+
 const FeedContent = styled.div`
-  border: 1px solid ${({ theme }) => theme.colors.line};
-  background-color: ${({ theme }) => theme.colors.white};
   margin-bottom: ${({ theme }) => theme.space.md};
+  margin-top: ${({ theme }) => theme.space.sm};
 `;
 const ListHeader = styled.div`
   display: flex;
@@ -36,7 +39,9 @@ const ListHeader = styled.div`
     }
   }
 `;
-const ListMain = styled.div``;
+const ListMain = styled.div`
+  box-size: border;
+`;
 const UserIcon = styled.div`
   margin-right: ${({ theme }) => theme.space.md};
   height: fit-content;
@@ -54,6 +59,7 @@ const UserIcon = styled.div`
 const ListFooterInfo = styled.div`
   display: flex;
   flex-direction: column;
+  padding-top: ${({ theme }) => theme.space.sm};
   > div {
     padding: 0 ${({ theme }) => theme.space.md};
     font-size: 14px;
@@ -83,6 +89,7 @@ const ListFooterInfo = styled.div`
 
 function FollowerList(props: Feed) {
   const reply = useInput('');
+  const ListCount = useListCount(0);
   const nowdate = dayjs(Date(), 'YYYY-MM-DD HH:mm:ss.SSS');
   const week = nowdate.diff(props.registerDate, 'w');
   const day = nowdate.diff(props.registerDate, 'd');
@@ -111,7 +118,7 @@ function FollowerList(props: Feed) {
           </div>
         </ListHeader>
         <ListMain>
-          <div></div>
+          <FeedItem {...ListCount}></FeedItem>
         </ListMain>
         <section>
           <ListFooterInfo>
@@ -121,7 +128,11 @@ function FollowerList(props: Feed) {
               <span>&nbsp;subject...&nbsp;더보기</span>
             </div>
             <div>
-              댓글 <span>{props.commentCount}</span>개 모두 보기
+              {props.commentCount > 0 && (
+                <Link to={props.userName}>
+                  댓글 {props.commentCount} 더보기
+                </Link>
+              )}
             </div>
             <div>
               <span>{DayCount}</span>
