@@ -12,11 +12,6 @@ const ListItem = styled.div`
       min-width: 0;
       > div {
         display: flex;
-        > div {
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-        }
       }
     }
     :nth-child(3) {
@@ -42,6 +37,20 @@ const ListItem = styled.div`
     }
   }
 `;
+const UserId = styled.div`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-wieght: bold;
+  font-size: 14px;
+`;
+const UserName = styled.div`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+  color: ${({ theme }) => theme.colors.secondfont};
+`;
 const UserIcon = styled.div`
   margin-right: ${({ theme }) => theme.space.md};
   width: 54px;
@@ -56,7 +65,7 @@ const UserIcon = styled.div`
     margin: auto;
   }
 `;
-function MainListItem() {
+function MainListItem(props: Feed) {
   return (
     <>
       <ListItem>
@@ -65,10 +74,10 @@ function MainListItem() {
         </UserIcon>
         <div>
           <div>
-            <div>usernickname</div>
+            <UserId>{props.userId}</UserId>
           </div>
           <div>
-            <div>username</div>
+            <UserName>{props.userName}</UserName>
           </div>
         </div>
         <div>

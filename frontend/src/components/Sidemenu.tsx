@@ -1,5 +1,6 @@
 import SidemenuItem from '@components/SidemenuItem';
 import useFakeFeedList from '@hooks/useFakeFeedList';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const SidemenuContainer = styled.div`
@@ -48,7 +49,7 @@ const SideTitle = styled.div`
     flex: 1 1 auto;
     color: ${({ theme }) => theme.colors.secondfont};
   }
-  div:nth-child(2) {
+  a {
     font-size: 12px;
   }
 `;
@@ -66,7 +67,7 @@ function Sidemenu() {
         </Profile>
         <SideTitle>
           <div>회원님을 위한 추천</div>
-          <div>모두 보기</div>
+          <Link to="/explore">모두 보기</Link>
         </SideTitle>
         <SideRecommend>
           {fakeFeedList.map((feedItem, key) => (
