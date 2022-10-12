@@ -60,23 +60,21 @@ function RecommendCard({ Count, setCount }: List) {
   const [prevbtn, Setprev] = useState(false);
   const fakeFeedList = useFakeFeedList();
   const maxCount = fakeFeedList.length - 2;
-  function Pagemove(event: String) {
-    if (event === 'prev') {
-      setCount((Count: number) => Count - 1);
-      if (Count === 1) {
-        Setprev(false);
-      }
-      Setnext(true);
+  function nextmove() {
+    if (maxCount > Count) {
+      setCount((Count: number) => Count + 1);
     }
-    if (event === 'next') {
-      if (maxCount > Count) {
-        setCount((Count: number) => Count + 1);
-      }
-      if (maxCount - 1 === Count) {
-        Setnext(false);
-      }
-      Setprev(true);
+    if (maxCount - 1 === Count) {
+      Setnext(false);
     }
+    Setprev(true);
+  }
+  function prevmove() {
+    setCount((Count: number) => Count - 1);
+    if (Count === 1) {
+      Setprev(false);
+    }
+    Setnext(true);
   }
   const styled = {
     transform: `translateX(calc(-200px * ${Count}))`,
@@ -89,20 +87,21 @@ function RecommendCard({ Count, setCount }: List) {
           <div>모두 보기</div>
         </div>
       </CardHeader>
-      {prevbtn && (
-        <Prevbtn onClick={() => Pagemove('prev')}>
-          <div>
-            <FontAwesomeIcon icon={faAngleLeft} />
-          </div>
-        </Prevbtn>
-      )}
+
       <CardList style={styled}>
         {fakeFeedList.map((feedItem, key) => (
           <RecommendCardItem {...feedItem} key={key}></RecommendCardItem>
         ))}
       </CardList>
+      {prevbtn && (
+        <Prevbtn onClick={prevmove}>
+          <div>
+            <FontAwesomeIcon icon={faAngleLeft} />
+          </div>
+        </Prevbtn>
+      )}
       {nextbtn && (
-        <Prevbtn style={nextstyle} onClick={() => Pagemove('next')}>
+        <Prevbtn style={nextstyle} onClick={nextmove}>
           <div>
             <FontAwesomeIcon icon={faAngleRight} />
           </div>
