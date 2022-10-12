@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
-import FollowerListReply from '@components/FeedReply';
+import FeedReply from '@components/FeedReply';
 import useInput from '@hooks/useInput';
 import dayjs from 'dayjs';
 import FeedItem from '@components/FeedItem';
@@ -138,7 +138,7 @@ function FollowerList(props: Feed) {
               <span>{DayCount}</span>
             </div>
           </ListFooterInfo>
-          <FollowerListReply {...reply} />
+          <FeedReply {...reply} />
         </section>
       </FeedContent>
     </>
