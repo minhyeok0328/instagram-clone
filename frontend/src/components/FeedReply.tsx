@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFaceSmile } from '@fortawesome/free-solid-svg-icons';
 import React, { InputHTMLAttributes } from 'react';
+
 const ListFooterInput = styled.section`
   padding-left: ${({ theme }) => theme.space.md};
   padding-right: ${({ theme }) => theme.space.xl};
