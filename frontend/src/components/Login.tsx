@@ -1,7 +1,8 @@
 import { ReactComponent as InstagramLogo } from '@assets/images/logo.svg';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import React, { InputHTMLAttributes, useState } from 'react';
+import React, { useState } from 'react';
+
 const Logincontent = styled.div`
   display: flex;
   flex-direction: column;
@@ -9,6 +10,7 @@ const Logincontent = styled.div`
   position: relative;
   vertical-align: baseline;
   border: 1px solid ${({ theme }) => theme.colors.line};
+  margin: 0 0 10px;
 `;
 const Loginbutton = styled.div`
   cursor: pointer;
@@ -60,6 +62,7 @@ const Logininput = styled.div`
     left: 8px;
     line-height: 36px;
     pointer-events: none;
+    transform-origin: left;
     position: absolute;
   }
 `;
@@ -94,37 +97,38 @@ const Findaccount = styled.div`
 `;
 
 function Login() {
-  const [id, setid] = useState('');
-  const [password, setpassword] = useState('');
-  const [styleid, setstyleid] = useState({});
-  const [stylepw, setstylepw] = useState({});
+  const [id, setid] = useState({ text: '', style: {} });
+  const [password, setpassword] = useState({ text: '', style: {} });
   const [stylebtn, setstylebtn] = useState({});
   function Inputid(id: string) {
-    setid(id);
-    if (id) {
-      setstyleid({
-        transform: 'scale(calc(10 / 12)) translateY(-10px) translateX(-15px)',
+    setid({
+      text: id,
+      style: { transform: 'scale(calc(10 / 12)) translateY(-10px)' },
+    });
+    if (!id) {
+      setid({
+        text: id,
+        style: { display: 'block' },
       });
     }
-    if (!id) {
-      setstyleid({ display: 'block' });
-    }
-    if (password.length > 5 && id) {
+    if (password.text.length > 5 && id) {
       setstylebtn({ opacity: '1' });
     } else {
       setstylebtn({ opacity: '.3' });
     }
   }
   function Inputpw(password: string) {
-    setpassword(password);
-    console.log(password);
-    if (password) {
-      setstylepw({ transform: 'scale(calc(10 / 12)) translateY(-10px)' });
-    }
+    setpassword({
+      text: password,
+      style: { transform: 'scale(calc(10 / 12)) translateY(-10px)' },
+    });
     if (!password) {
-      setstylepw({ display: 'block' });
+      setpassword({
+        text: password,
+        style: { display: 'block' },
+      });
     }
-    if (password.length > 5 && id) {
+    if (password.length > 5 && id.text) {
       setstylebtn({ opacity: '1' });
     } else {
       setstylebtn({ opacity: '.3' });
@@ -139,18 +143,18 @@ function Login() {
       </Logo>
       <div>
         <Logininput>
-          <span style={styleid}>전화번호, 사용자 이름 또는 이메일</span>
+          <span style={id.style}>전화번호, 사용자 이름 또는 이메일</span>
           <input
             type="text"
-            value={id}
+            value={id.text}
             onChange={({ target }) => Inputid(target.value)}
           />
         </Logininput>
         <Logininput>
-          <span style={stylepw}>비밀번호</span>
+          <span style={password.style}>비밀번호</span>
           <input
             type="text"
-            value={password}
+            value={password.text}
             onChange={({ target }) => Inputpw(target.value)}
           />
         </Logininput>
