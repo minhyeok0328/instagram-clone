@@ -15,6 +15,7 @@ const defaultThemeSpec: DefaultSpec = {
     line: '#dbdbdb',
     secondfont: '#8E8E8E',
     Pagebutton: '#7f7f7f',
+    link: '#00376b',
   },
   space: {
     xl: '30px',
@@ -36,6 +37,7 @@ const lightTheme: BaseTheme = {
     line: '#dbdbdb',
     secondfont: '#8E8E8E',
     Pagebutton: '#7f7f7f',
+    link: '#00376b',
   },
   space: {
     ...defaultThemeSpec.space,
