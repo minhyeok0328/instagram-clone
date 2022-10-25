@@ -14,6 +14,7 @@ const HeaderContainer = styled.div`
   max-width: calc(935px + 40px);
   padding: 0 20px;
   margin: 0 auto;
+  z-index: 1;
   > div {
     flex: 1 0 127px;
     :nth-child(1) {
@@ -25,10 +26,10 @@ const HeaderContainer = styled.div`
   }
 `;
 const Header = styled.div`
-  position: sticky;
+  position: fixed;
   left: 0;
-  top: 0;
   z-index: 1;
+  top: 0;
   width: 100%;
   height: 60px;
   align-items: center;

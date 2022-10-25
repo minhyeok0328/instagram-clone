@@ -40,7 +40,7 @@ const ListHeader = styled.div`
   }
 `;
 const ListMain = styled.div`
-  box-size: border;
+  box-sizing: border-box;
 `;
 const UserIcon = styled.div`
   margin-right: ${({ theme }) => theme.space.md};
@@ -129,7 +129,7 @@ function FollowerList(props: Feed) {
             </div>
             <div>
               {props.commentCount > 0 && (
-                <Link to={props.userName}>
+                <Link to={`p/${props.userName}`}>
                   댓글 {props.commentCount} 더보기
                 </Link>
               )}
