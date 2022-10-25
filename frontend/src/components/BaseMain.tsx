@@ -5,6 +5,8 @@ import useFakeFeedList from '@hooks/useFakeFeedList';
 import Feed from '@components/Feed';
 import Sidemenu from '@components/Sidemenu';
 import Follow from '@components/Follow';
+import { Outlet } from 'react-router-dom';
+
 const Main = styled.main`
   background-color: ${({ theme }) => theme.colors.background};
   > div {
@@ -57,17 +59,20 @@ function BaseMain() {
     }
   });
   return (
-    <Main>
-      <div>
-        <MaincContainer>
-          <Maincontent style={Feddstyle}>
-            <Follow />
-          </Maincontent>
-          {List}
-        </MaincContainer>
-        <Sidemenu />
-      </div>
-    </Main>
+    <>
+      <Main>
+        <div>
+          <MaincContainer>
+            <Maincontent style={Feddstyle}>
+              <Follow />
+            </Maincontent>
+            {List}
+          </MaincContainer>
+          <Sidemenu />
+        </div>
+      </Main>
+      <Outlet />
+    </>
   );
 }
 

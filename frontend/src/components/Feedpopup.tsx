@@ -5,8 +5,15 @@ import FollowerListReply from '@components/FeedReply';
 import useInput from '@hooks/useInput';
 import useListCount from '@hooks/useListCount';
 import FeedItem from '@components/FeedItem';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 
+const Feedcontroller = styled.div`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 2;
+`;
 const FeedContent = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.line};
   background-color: ${({ theme }) => theme.colors.white};
@@ -86,39 +93,78 @@ const Comment = styled.section`
 const CommentContent = styled.div`
   flex: 1 auto;
 `;
+const PopupBackground = styled.div`
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background-color: ${({ theme }) => theme.colors.black};
+  opacity: 0.4;
+  > span {
+    position: fixed;
+    cursor: pointer;
+    z-index: 1;
+    top 15px;
+    right: 15px;
+    color: ${({ theme }) => theme.colors.white};
+    c
+  }
+`;
 function Feedpopup() {
   const reply = useInput('');
   let { id } = useParams();
   const ListCount = useListCount(0);
+  const Navigate = useNavigate();
+  useEffect(() => {
+    document.body.style.cssText = `
+      position: fixed; 
+      top: -${window.scrollY}px;
+      overflow-y: scroll;
+      width: 100%;`;
+    return () => {
+      const scrollY = document.body.style.top;
+      document.body.style.cssText = '';
+      window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+    };
+  }, []);
+  function feedClose() {
+    Navigate('/');
+  }
   return (
     <>
-      <FeedContent>
-        <ListMain>
-          <FeedItem {...ListCount}></FeedItem>
-        </ListMain>
-        <Comment>
-          <ListHeader>
-            <div>
-              <UserIcon>
-                <div></div>
-              </UserIcon>
-              <div>username,{id}</div>
-            </div>
-            <div>
-              <button>
-                <FontAwesomeIcon icon={faEllipsis} />
-              </button>
-            </div>
-          </ListHeader>
-          <CommentContent>
-            <ul></ul>
-          </CommentContent>
-          <ListFooterInfo>
-            <div>좋아요 12개</div>
-            <FollowerListReply {...reply} />
-          </ListFooterInfo>
-        </Comment>
-      </FeedContent>
+      <PopupBackground onClick={feedClose}>
+        <span>X</span>
+      </PopupBackground>
+      <Feedcontroller>
+        <FeedContent>
+          <ListMain>
+            <FeedItem {...ListCount}></FeedItem>
+          </ListMain>
+          <Comment>
+            <ListHeader>
+              <div>
+                <UserIcon>
+                  <div></div>
+                </UserIcon>
+                <div>username,{id}</div>
+              </div>
+              <div>
+                <button>
+                  <FontAwesomeIcon icon={faEllipsis} />
+                </button>
+              </div>
+            </ListHeader>
+            <CommentContent>
+              <ul></ul>
+            </CommentContent>
+            <ListFooterInfo>
+              <div>좋아요 12개</div>
+              <FollowerListReply {...reply} />
+            </ListFooterInfo>
+          </Comment>
+        </FeedContent>
+      </Feedcontroller>
     </>
   );
 }
