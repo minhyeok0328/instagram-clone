@@ -6,24 +6,25 @@ import useInput from '@hooks/useInput';
 import useListCount from '@hooks/useListCount';
 import FeedItem from '@components/FeedItem';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const Feedcontroller = styled.div`
-  width: 100%;
-  height: 100%;
   position: fixed;
-  z-index: 2;
+  z-index: 1;
+  flex-direction: column;
+  display: flex;
 `;
 const FeedContent = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.line};
   background-color: ${({ theme }) => theme.colors.white};
   display: flex;
   margin: auto;
-  justify-content: center;
+  z-index: 2;
   position: fixed;
-  top: 30%;
-  left: 10%;
-  width: fit-content;
+  justify-content: center;
+  max-width: calc(${window.innerWidth}px - 64px - 64px);
+  min-height: 405px;
+  max-height: calc(100vh - 40px);
 `;
 const ListHeader = styled.div`
   display: flex;
@@ -54,9 +55,8 @@ const ListHeader = styled.div`
 `;
 const ListMain = styled.div`
   display: flex;
-  width: 100%;
   overflow: hidden;
-  max-width: 640px;
+  width: calc(100% - 405px);
 `;
 const UserIcon = styled.div`
   margin-right: ${({ theme }) => theme.space.md};
@@ -85,13 +85,13 @@ const ListFooterInfo = styled.div`
 `;
 const Comment = styled.section`
   min-width: 405px;
-  max-width: 500px;
+  max-width: 480px;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
 `;
 const CommentContent = styled.div`
-  flex: 1 auto;
+  flex: 1 1 auto;
 `;
 const PopupBackground = styled.div`
   position: absolute;
@@ -116,9 +116,10 @@ function Feedpopup() {
   let { id } = useParams();
   const ListCount = useListCount(0);
   const Navigate = useNavigate();
+  const [resize, setresize] = useState({});
   useEffect(() => {
     document.body.style.cssText = `
-      position: fixed; 
+      position: fixed;
       top: -${window.scrollY}px;
       overflow-y: scroll;
       width: 100%;`;
@@ -131,15 +132,27 @@ function Feedpopup() {
   function feedClose() {
     Navigate('/');
   }
+  const handleResize = () => {
+    setresize({
+      maxWidth: `calc(${window.innerWidth}px - 64px - 64px)`,
+    });
+  };
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <>
       <PopupBackground onClick={feedClose}>
         <span>X</span>
       </PopupBackground>
       <Feedcontroller>
-        <FeedContent>
+        <FeedContent style={resize}>
           <ListMain>
-            <FeedItem {...ListCount}></FeedItem>
+            <FeedItem {...ListCount} />
           </ListMain>
           <Comment>
             <ListHeader>

@@ -18,6 +18,7 @@ const Main = styled.main`
   align-items: stretch;
   margin: 0;
   padding: 0;
+  padding-top: 60px;
 `;
 const MaincContainer = styled.section`
   margin: auto;
@@ -60,6 +61,7 @@ function BaseMain() {
   });
   return (
     <>
+      <Outlet />
       <Main>
         <div>
           <MaincContainer>
@@ -71,7 +73,6 @@ function BaseMain() {
           <Sidemenu />
         </div>
       </Main>
-      <Outlet />
     </>
   );
 }

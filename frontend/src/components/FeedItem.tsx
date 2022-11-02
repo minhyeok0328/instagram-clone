@@ -26,9 +26,11 @@ const Prevbtn = styled.div`
 const ImgList = styled.div`
   display: flex;
   transition: 0.5s;
+  > div {
+    width: 100%;
+  }
   > img {
     object-fit: cover;
-    width: 100%;
   }
 `;
 const nextstyle = {
@@ -61,7 +63,6 @@ function FeedItem({ Count, setCount }: List) {
       Setprev(true);
     }
   }
-  console.log(Count);
   const styled = {
     transform: `translateX(calc(-100% * ${Count}))`,
   };
@@ -69,7 +70,9 @@ function FeedItem({ Count, setCount }: List) {
     <MainList>
       <ImgList style={styled}>
         {fakeFeedList.map((feedimg, key) => (
-          <img src={feedimg.image} key={key} alt="" />
+          <div>
+            <img src={feedimg.image} key={key} alt="" />
+          </div>
         ))}
       </ImgList>
       {prevbtn && (
