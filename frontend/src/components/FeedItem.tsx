@@ -1,8 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import useFakeFeedList from '@hooks/useFakeFeedList';
+
 const MainList = styled.div`
   position: relative;
 `;
@@ -28,9 +29,15 @@ const ImgList = styled.div`
   transition: 0.5s;
   > div {
     width: 100%;
-  }
-  > img {
-    object-fit: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    > img {
+      object-fit: cover;
+      width: calc(${window.innerWidth}px - 64px - 64px - 405px);
+      max-width: calc(${window.innerWidth}px - 64px - 64px - 405px);
+      max-height: calc(100vh - 40px);
+    }
   }
 `;
 const nextstyle = {
@@ -43,6 +50,7 @@ interface List {
 function FeedItem({ Count, setCount }: List) {
   const [nextbtn, Setnext] = useState(true);
   const [prevbtn, Setprev] = useState(false);
+  const [resize, setresize] = useState({});
   const fakeFeedList = useFakeFeedList();
   const maxCount = fakeFeedList.length - 1;
   function Pagemove(event: String) {
@@ -66,12 +74,23 @@ function FeedItem({ Count, setCount }: List) {
   const styled = {
     transform: `translateX(calc(-100% * ${Count}))`,
   };
+  const handleResize = () => {
+    setresize({
+      width: `calc(${window.innerWidth}px - 64px - 64px - 405px)`,
+    });
+  };
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   return (
     <MainList>
       <ImgList style={styled}>
         {fakeFeedList.map((feedimg, key) => (
           <div>
-            <img src={feedimg.image} key={key} alt="" />
+            <img src={feedimg.image} key={key} alt="" style={resize} />
           </div>
         ))}
       </ImgList>

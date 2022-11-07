@@ -9,21 +9,22 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 const Feedcontroller = styled.div`
-  position: fixed;
-  z-index: 1;
-  flex-direction: column;
+  position: absolute;
   display: flex;
+  flex-direction: column;
 `;
 const FeedContent = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.line};
   background-color: ${({ theme }) => theme.colors.white};
   display: flex;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   margin: auto;
   z-index: 2;
-  position: fixed;
   justify-content: center;
   max-width: calc(${window.innerWidth}px - 64px - 64px);
-  min-height: 405px;
   max-height: calc(100vh - 40px);
 `;
 const ListHeader = styled.div`
@@ -56,7 +57,6 @@ const ListHeader = styled.div`
 const ListMain = styled.div`
   display: flex;
   overflow: hidden;
-  width: calc(100% - 405px);
 `;
 const UserIcon = styled.div`
   margin-right: ${({ theme }) => theme.space.md};
@@ -94,7 +94,7 @@ const CommentContent = styled.div`
   flex: 1 1 auto;
 `;
 const PopupBackground = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   z-index: 1;
   width: 100%;
@@ -108,7 +108,6 @@ const PopupBackground = styled.div`
     top 15px;
     right: 15px;
     color: ${({ theme }) => theme.colors.white};
-    c
   }
 `;
 function Feedpopup() {
@@ -134,7 +133,7 @@ function Feedpopup() {
   }
   const handleResize = () => {
     setresize({
-      maxWidth: `calc(${window.innerWidth}px - 64px - 64px)`,
+      width: `calc(${window.innerWidth}px - 64px - 64px)`,
     });
   };
   useEffect(() => {
@@ -143,9 +142,8 @@ function Feedpopup() {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
-
   return (
-    <>
+    <div>
       <PopupBackground onClick={feedClose}>
         <span>X</span>
       </PopupBackground>
@@ -178,7 +176,7 @@ function Feedpopup() {
           </Comment>
         </FeedContent>
       </Feedcontroller>
-    </>
+    </div>
   );
 }
 export default Feedpopup;
