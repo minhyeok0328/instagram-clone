@@ -5,7 +5,7 @@ import { ReactComponent as InstagramLogo } from '@assets/images/logo.svg';
 import IconNav from './IconNav';
 import { Link } from 'react-router-dom';
 
-const HeaderContainer = styled.div`
+const HeaderContent = styled.div`
   height: 60px;
   display: flex;
   justify-content: center;
@@ -25,8 +25,8 @@ const HeaderContainer = styled.div`
     }
   }
 `;
-const Header = styled.div`
-  position: fixed;
+const HeaderContainer = styled.div`
+  position: sticky;
   left: 0;
   z-index: 1;
   top: 0;
@@ -40,8 +40,8 @@ function BaseHeader() {
   const search = useInput('');
 
   return (
-    <Header>
-      <HeaderContainer>
+    <HeaderContainer>
+      <HeaderContent>
         <div>
           <Link to="/">
             <InstagramLogo />
@@ -49,8 +49,8 @@ function BaseHeader() {
         </div>
         <TextField {...search} placeholder="검색" search={true} />
         <IconNav />
-      </HeaderContainer>
-    </Header>
+      </HeaderContent>
+    </HeaderContainer>
   );
 }
 

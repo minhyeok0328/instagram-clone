@@ -3,11 +3,10 @@ import { Route, Routes } from 'react-router-dom';
 import BaseMain from '@components/BaseMain';
 import Recommend from '@components/Recommend';
 import Feedpopup from '@components/Feedpopup';
-import BaseHeader from '@components/BaseHeader';
+
 function Main() {
   return (
     <>
-      <BaseHeader />
       <Routes>
         <Route path="" element={<BaseMain />}>
           <Route path="/p/:id" element={<Feedpopup />}></Route>
