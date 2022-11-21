@@ -6,6 +6,11 @@ import Feed from '@components/Feed';
 import Sidemenu from '@components/Sidemenu';
 import Follow from '@components/Follow';
 import { Outlet } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../state';
+import { useEffect } from 'react';
+import { RootState } from '../state/reducers';
 
 const Main = styled.main`
   background-color: ${({ theme }) => theme.colors.background};
@@ -18,7 +23,6 @@ const Main = styled.main`
   align-items: stretch;
   margin: 0;
   padding: 0;
-  padding-top: 60px;
 `;
 const MaincContainer = styled.section`
   margin: auto;
@@ -39,6 +43,19 @@ const Feddstyle = {
 function BaseMain() {
   const ListCount = useListCount(0);
   const fakeFeedList = useFakeFeedList();
+  const dispatch = useDispatch();
+  const { Resize } = bindActionCreators(actionCreators, dispatch);
+  Resize(window.innerHeight);
+  const handleResize = () => {
+    let height = window.innerHeight + 500;
+    Resize(height);
+  };
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   const List = fakeFeedList.map((feedItem, key) => {
     if (key === 2) {
       return (
@@ -61,7 +78,6 @@ function BaseMain() {
   });
   return (
     <>
-      <Outlet />
       <Main>
         <div>
           <MaincContainer>
@@ -73,6 +89,7 @@ function BaseMain() {
           <Sidemenu />
         </div>
       </Main>
+      <Outlet />
     </>
   );
 }

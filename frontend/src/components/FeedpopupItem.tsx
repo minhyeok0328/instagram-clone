@@ -3,8 +3,16 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import useFakeFeedList from '@hooks/useFakeFeedList';
+import { useSelector } from 'react-redux';
+import { RootState } from '../state/reducers';
 const MainList = styled.div`
   position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-shrink: 0;
 `;
 const Prevbtn = styled.div`
   > div {
@@ -23,17 +31,45 @@ const Prevbtn = styled.div`
   overflow: hidden;
   white-space: nowrap;
 `;
-const ImgList = styled.div`
-  display: flex;
+
+const ImgList = styled.ul`
+  width: 100%;
+  height: 100%;
   transition: 0.5s;
+  display: flex;
   position: relative;
-  > div {
+  flex-direction: row;
+  > li {
+    position: absolute;
     width: 100%;
     height: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: relative;
+    align-items: center;
+    background: ${({ theme }) => theme.colors.black};
+    > div {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      padding-top: 75%;
+      height: 0;
+      > div {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        transform: translate(50%, 50%);
+        height: 100%;
+        > img {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          transform: translate(-50%, -50%);
+        }
+      }
+    }
   }
 `;
 const nextstyle = {
@@ -43,7 +79,7 @@ interface List {
   Count: Number;
   setCount: Function;
 }
-function FeedItem({ Count, setCount }: List) {
+function FeedpopupItem({ Count, setCount }: List) {
   const [nextbtn, Setnext] = useState(true);
   const [prevbtn, Setprev] = useState(false);
   const fakeFeedList = useFakeFeedList();
@@ -66,16 +102,20 @@ function FeedItem({ Count, setCount }: List) {
       Setprev(true);
     }
   }
-  const styled = {
-    transform: `translateX(calc(-100% * ${Count}))`,
-  };
+  // const styled = {
+  //   transform: `translateX(calc((-${state}px + 150px + 405px) * ${Count} ))`,
+  // };
   return (
     <MainList>
-      <ImgList style={styled}>
+      <ImgList>
         {fakeFeedList.map((feedimg, key) => (
-          <div>
-            <img src={feedimg.image} key={key} alt="" />
-          </div>
+          <li>
+            <div>
+              <div>
+                <img src={feedimg.image} key={key} alt="" />
+              </div>
+            </div>
+          </li>
         ))}
       </ImgList>
       {prevbtn && (
@@ -95,4 +135,4 @@ function FeedItem({ Count, setCount }: List) {
     </MainList>
   );
 }
-export default FeedItem;
+export default FeedpopupItem;

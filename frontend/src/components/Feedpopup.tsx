@@ -4,30 +4,82 @@ import styled from 'styled-components';
 import FollowerListReply from '@components/FeedReply';
 import useInput from '@hooks/useInput';
 import useListCount from '@hooks/useListCount';
-import FeedItem from '@components/FeedItem';
+import FeedpopupItem from '@components/FeedpopupItem';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../state/reducers';
 
+const Test = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 1;
+`;
 const Feedcontroller = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
 `;
 const FeedContent = styled.div`
-  border: 1px solid ${({ theme }) => theme.colors.line};
   background-color: ${({ theme }) => theme.colors.white};
   display: flex;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  flex: 0 0 auto;
   margin: auto;
   z-index: 2;
+  flex-direction: row;
   justify-content: center;
-  max-width: calc(${window.innerWidth}px - 64px - 64px);
-  max-height: calc(100vh - 40px);
+  max-height: inherit;
+  max-width: inherit;
 `;
-const ListHeader = styled.div`
+
+const FeedMain = styled.div`
+  display: flex;
+  overflow: hidden;
+  max-height: calc(100vh - 40px);
+  width: 100%;
+  flex-grow: 1;
+  justify-content: center;
+  flex-direction: column;
+`;
+const UserIcon = styled.div`
+  margin-right: ${({ theme }) => theme.space.md};
+  height: fit-content;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  > div {
+    width: 32px;
+    height: 32px;
+    background-color: ${({ theme }) => theme.colors.black};
+    border-radius: 50%;
+    margin: auto;
+  }
+`;
+const CommentFooterInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  > div {
+    padding: 0 ${({ theme }) => theme.space.md};
+    font-size: 14px;
+    margin-bottom: ${({ theme }) => theme.space.sm};
+    :nth-child(1) {
+      font-weight: bold;
+    }
+`;
+const Comment = styled.section`
+  min-width: 405px;
+  max-width: 480px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+`;
+const CommentHeader = styled.div`
   display: flex;
   justify-content: space-between;
   > div {
@@ -54,48 +106,15 @@ const ListHeader = styled.div`
     }
   }
 `;
-const ListMain = styled.div`
-  display: flex;
-  overflow: hidden;
-`;
-const UserIcon = styled.div`
-  margin-right: ${({ theme }) => theme.space.md};
-  height: fit-content;
-  width: fit-content;
-  display: flex;
-  align-items: center;
-  > div {
-    width: 32px;
-    height: 32px;
-    background-color: ${({ theme }) => theme.colors.black};
-    border-radius: 50%;
-    margin: auto;
-  }
-`;
-const ListFooterInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  > div {
-    padding: 0 ${({ theme }) => theme.space.md};
-    font-size: 14px;
-    margin-bottom: ${({ theme }) => theme.space.sm};
-    :nth-child(1) {
-      font-weight: bold;
-    }
-`;
-const Comment = styled.section`
-  min-width: 405px;
-  max-width: 480px;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-`;
 const CommentContent = styled.div`
   flex: 1 1 auto;
 `;
 const PopupBackground = styled.div`
   position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 1;
   width: 100%;
   height: 100%;
@@ -115,7 +134,6 @@ function Feedpopup() {
   let { id } = useParams();
   const ListCount = useListCount(0);
   const Navigate = useNavigate();
-  const [resize, setresize] = useState({});
   useEffect(() => {
     document.body.style.cssText = `
       position: fixed;
@@ -131,29 +149,25 @@ function Feedpopup() {
   function feedClose() {
     Navigate('/');
   }
-  const handleResize = () => {
-    setresize({
-      width: `calc(${window.innerWidth}px - 64px - 64px)`,
-    });
+  const state = useSelector((state: RootState) => state.bank);
+  const resize = {
+    width: `${state}px`,
+    height: `${state}`,
+    flexBasis: `${state}px`,
+    aspectRatio: '1 / 1',
   };
-  useEffect(() => {
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
   return (
-    <div>
+    <Test>
       <PopupBackground onClick={feedClose}>
         <span>X</span>
       </PopupBackground>
       <Feedcontroller>
-        <FeedContent style={resize}>
-          <ListMain>
-            <FeedItem {...ListCount} />
-          </ListMain>
+        <FeedContent>
+          <FeedMain style={resize}>
+            <FeedpopupItem {...ListCount} />
+          </FeedMain>
           <Comment>
-            <ListHeader>
+            <CommentHeader>
               <div>
                 <UserIcon>
                   <div></div>
@@ -165,18 +179,18 @@ function Feedpopup() {
                   <FontAwesomeIcon icon={faEllipsis} />
                 </button>
               </div>
-            </ListHeader>
+            </CommentHeader>
             <CommentContent>
               <ul></ul>
             </CommentContent>
-            <ListFooterInfo>
+            <CommentFooterInfo>
               <div>좋아요 12개</div>
               <FollowerListReply {...reply} />
-            </ListFooterInfo>
+            </CommentFooterInfo>
           </Comment>
         </FeedContent>
       </Feedcontroller>
-    </div>
+    </Test>
   );
 }
 export default Feedpopup;
