@@ -5,6 +5,7 @@ import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import useFakeFeedList from '@hooks/useFakeFeedList';
 import { useSelector } from 'react-redux';
 import { RootState } from '../state/reducers';
+
 const MainList = styled.div`
   position: relative;
   width: 100%;
@@ -33,14 +34,13 @@ const Prevbtn = styled.div`
 `;
 
 const ImgList = styled.ul`
-  width: 100%;
+  width: 600%;
   height: 100%;
   transition: 0.5s;
   display: flex;
   position: relative;
   flex-direction: row;
   > li {
-    position: absolute;
     width: 100%;
     height: 100%;
     display: flex;
@@ -102,14 +102,19 @@ function FeedpopupItem({ Count, setCount }: List) {
       Setprev(true);
     }
   }
-  // const styled = {
-  //   transform: `translateX(calc((-${state}px + 150px + 405px) * ${Count} ))`,
-  // };
+  const state = useSelector((state: RootState) => state.bank);
+  const resize = {
+    width: `${state}px`,
+    height: `${state}px`,
+  };
+  const styled = {
+    transform: `translateX(calc((-${state}px) * ${Count} ))`,
+  };
   return (
     <MainList>
-      <ImgList>
+      <ImgList style={styled}>
         {fakeFeedList.map((feedimg, key) => (
-          <li>
+          <li style={resize}>
             <div>
               <div>
                 <img src={feedimg.image} key={key} alt="" />
