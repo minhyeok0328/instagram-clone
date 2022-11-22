@@ -34,7 +34,7 @@ const Prevbtn = styled.div`
 `;
 
 const ImgList = styled.ul`
-  width: 600%;
+  width: 100%;
   height: 100%;
   transition: 0.5s;
   display: flex;
@@ -83,6 +83,7 @@ function FeedpopupItem({ Count, setCount }: List) {
   const [nextbtn, Setnext] = useState(true);
   const [prevbtn, Setprev] = useState(false);
   const fakeFeedList = useFakeFeedList();
+  console.log(fakeFeedList.length);
   const maxCount = fakeFeedList.length - 1;
   function Pagemove(event: String) {
     if (event === 'prev') {
@@ -108,6 +109,7 @@ function FeedpopupItem({ Count, setCount }: List) {
     height: `${state}px`,
   };
   const styled = {
+    width: `calc(${fakeFeedList.length} * 100%)`,
     transform: `translateX(calc((-${state}px) * ${Count} ))`,
   };
   return (
