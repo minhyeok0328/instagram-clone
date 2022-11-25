@@ -72,6 +72,28 @@ const ImgList = styled.ul`
     }
   }
 `;
+const ImgListRadio = styled.div`
+  align-items: center;
+  bottom: 15px;
+  justify-content: center;
+  left: 6px;
+  pointer-events: none;
+  position: absolute;
+  right: 6px;
+  display: flex;
+  > .radioselect {
+    opacity: 1;
+  }
+`;
+const Radio = styled.div`
+  border-radius: 50%;
+  height: 6px;
+  transition: all 0.2s ease-in-out;
+  width: 6px;
+  margin-right: 4px;
+  background-color: ${({ theme }) => theme.colors.white};
+  opacity: 0.4;
+`;
 const nextstyle = {
   right: '0',
 };
@@ -83,7 +105,6 @@ function FeedpopupItem({ Count, setCount }: List) {
   const [nextbtn, Setnext] = useState(true);
   const [prevbtn, Setprev] = useState(false);
   const fakeFeedList = useFakeFeedList();
-  console.log(fakeFeedList.length);
   const maxCount = fakeFeedList.length - 1;
   function Pagemove(event: String) {
     if (event === 'prev') {
@@ -103,6 +124,13 @@ function FeedpopupItem({ Count, setCount }: List) {
       Setprev(true);
     }
   }
+  const List = fakeFeedList.map((feedItem, key) => {
+    if (key === Count) {
+      return <Radio key={key} className={'radioselect'}></Radio>;
+    } else {
+      return <Radio key={key}></Radio>;
+    }
+  });
   const state = useSelector((state: RootState) => state.bank);
   const resize = {
     width: `${state}px`,
@@ -125,6 +153,7 @@ function FeedpopupItem({ Count, setCount }: List) {
           </li>
         ))}
       </ImgList>
+      <ImgListRadio>{List}</ImgListRadio>
       {prevbtn && (
         <Prevbtn onClick={() => Pagemove('prev')}>
           <div>

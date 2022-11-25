@@ -36,6 +36,29 @@ const ImgList = styled.div`
     position: relative;
   }
 `;
+const ImgListRadio = styled.div`
+  align-items: center;
+  bottom: 15px;
+  justify-content: center;
+  left: 6px;
+  pointer-events: none;
+  position: absolute;
+  right: 6px;
+  display: flex;
+  > .radioselect {
+    opacity: 1;
+  }
+`;
+const Radio = styled.div`
+  border-radius: 50%;
+  height: 6px;
+  transition: all 0.2s ease-in-out;
+  width: 6px;
+  margin-right: 4px;
+  background-color: ${({ theme }) => theme.colors.white};
+  opacity: 0.4;
+`;
+
 const nextstyle = {
   right: '0',
 };
@@ -66,6 +89,13 @@ function FeedItem({ Count, setCount }: List) {
       Setprev(true);
     }
   }
+  const List = fakeFeedList.map((feedItem, key) => {
+    if (key === Count) {
+      return <Radio key={key} className={'radioselect'}></Radio>;
+    } else {
+      return <Radio key={key}></Radio>;
+    }
+  });
   const styled = {
     transform: `translateX(calc(-100% * ${Count}))`,
   };
@@ -78,6 +108,7 @@ function FeedItem({ Count, setCount }: List) {
           </div>
         ))}
       </ImgList>
+      <ImgListRadio>{List}</ImgListRadio>
       {prevbtn && (
         <Prevbtn onClick={() => Pagemove('prev')}>
           <div>

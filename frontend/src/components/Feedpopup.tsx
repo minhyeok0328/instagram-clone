@@ -10,7 +10,7 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../state/reducers';
 
-const Test = styled.div`
+const Popup = styled.div`
   position: fixed;
   width: 100%;
   height: 100%;
@@ -152,12 +152,12 @@ function Feedpopup() {
   const state = useSelector((state: RootState) => state.bank);
   const resize = {
     width: `${state}px`,
-    height: `${state}`,
+    height: `${state}px`,
     flexBasis: `${state}px`,
     aspectRatio: '1 / 1',
   };
   return (
-    <Test>
+    <Popup>
       <PopupBackground onClick={feedClose}>
         <span>X</span>
       </PopupBackground>
@@ -190,7 +190,7 @@ function Feedpopup() {
           </Comment>
         </FeedContent>
       </Feedcontroller>
-    </Test>
+    </Popup>
   );
 }
 export default Feedpopup;
