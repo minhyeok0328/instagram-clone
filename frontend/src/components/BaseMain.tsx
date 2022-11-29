@@ -1,20 +1,17 @@
 import styled from 'styled-components';
-import RecommendCard from '@components/RecommendCard';
-import useListCount from '@hooks/useListCount';
-import useFakeFeedList from '@hooks/useFakeFeedList';
-import Feed from '@components/Feed';
 import Sidemenu from '@components/Sidemenu';
 import Follow from '@components/Follow';
 import { Outlet } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { actionCreators } from '../state';
-import { useEffect } from 'react';
-import { RootState } from '../state/reducers';
+import useFakeFeedList from '@hooks/useFakeFeedList';
+import MainFeed from '@components/MainFeed';
 
 const Main = styled.main`
   background-color: ${({ theme }) => theme.colors.background};
   > div {
+    height: 100%;
+    overflow: auto;
+  }
+  > div > div {
     display: flex;
     margin: auto;
     padding-top: ${({ theme }) => theme.space.md};
@@ -27,6 +24,7 @@ const Main = styled.main`
 const MaincContainer = styled.section`
   margin: auto;
 `;
+
 const Maincontent = styled.div`
   margin: auto;
   margin-bottom: ${({ theme }) => theme.space.md};
@@ -41,52 +39,24 @@ const Feddstyle = {
   margin: '16px 0',
 };
 function BaseMain() {
-  const ListCount = useListCount(0);
   const fakeFeedList = useFakeFeedList();
-  const dispatch = useDispatch();
-  const { Resize } = bindActionCreators(actionCreators, dispatch);
-  Resize(window.innerHeight);
-  const handleResize = () => {
-    let height = window.innerHeight + 500;
-    Resize(height);
+  const height = fakeFeedList.length * 600;
+  const Maxheight = {
+    height: `${height}px`,
   };
-  useEffect(() => {
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-  const List = fakeFeedList.map((feedItem, key) => {
-    if (key === 2) {
-      return (
-        <>
-          <Maincontent>
-            <RecommendCard {...ListCount} key={key}></RecommendCard>
-          </Maincontent>
-          <Maincontent>
-            <Feed {...feedItem} key={key} />
-          </Maincontent>
-        </>
-      );
-    } else {
-      return (
-        <Maincontent>
-          <Feed {...feedItem} key={key} />
-        </Maincontent>
-      );
-    }
-  });
   return (
     <>
       <Main>
         <div>
-          <MaincContainer>
-            <Maincontent style={Feddstyle}>
-              <Follow />
-            </Maincontent>
-            {List}
-          </MaincContainer>
-          <Sidemenu />
+          <div>
+            <MaincContainer style={Maxheight}>
+              <Maincontent style={Feddstyle}>
+                <Follow />
+              </Maincontent>
+              <MainFeed {...fakeFeedList} />
+            </MaincContainer>
+            <Sidemenu />
+          </div>
         </div>
       </Main>
       <Outlet />

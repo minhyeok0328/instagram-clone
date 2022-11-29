@@ -7,8 +7,10 @@ import useListCount from '@hooks/useListCount';
 import FeedpopupItem from '@components/FeedpopupItem';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import { RootState } from '../state/reducers';
+import { useDispatch, useSelector } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../state';
 
 const Popup = styled.div`
   position: fixed;
@@ -134,6 +136,7 @@ function Feedpopup() {
   let { id } = useParams();
   const ListCount = useListCount(0);
   const Navigate = useNavigate();
+  const dispatch = useDispatch();
   useEffect(() => {
     document.body.style.cssText = `
       position: fixed;
@@ -146,9 +149,15 @@ function Feedpopup() {
       window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
     };
   }, []);
+  const { Resize } = bindActionCreators(actionCreators, dispatch);
+  Resize(window.innerHeight + 500);
   function feedClose() {
     Navigate('/');
   }
+  const handleResize = () => {
+    let height = window.innerHeight + 500;
+    Resize(height);
+  };
   const state = useSelector((state: RootState) => state.bank);
   const resize = {
     width: `${state}px`,
@@ -156,6 +165,12 @@ function Feedpopup() {
     flexBasis: `${state}px`,
     aspectRatio: '1 / 1',
   };
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   return (
     <Popup>
       <PopupBackground onClick={feedClose}>
