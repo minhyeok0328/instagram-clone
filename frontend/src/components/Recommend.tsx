@@ -2,7 +2,7 @@ import RecommendItem from '@components/RecommendItem';
 import useFakeFeedList from '@hooks/useFakeFeedList';
 import styled from 'styled-components';
 
-const Recommend = styled.section`
+const MainList = styled.section`
   margin: auto;
   width: 600px;
   padding-top: 60px;
@@ -18,20 +18,20 @@ const Recommend = styled.section`
     background-color: ${({ theme }) => theme.colors.white};
   }
 `;
-function MainList() {
+function Recommend() {
   const FakeFeedList = useFakeFeedList();
   return (
     <>
-      <Recommend>
+      <MainList>
         <h4>추천</h4>
         <div>
           {FakeFeedList.map((feedlist, key) => (
             <RecommendItem {...feedlist}></RecommendItem>
           ))}
         </div>
-      </Recommend>
+      </MainList>
     </>
   );
 }
 
-export default MainList;
+export default Recommend;

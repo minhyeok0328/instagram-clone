@@ -87,7 +87,7 @@ const ListFooterInfo = styled.div`
   }
 `;
 
-function FollowerList(props: Feed) {
+function Feed(props: Feed) {
   const reply = useInput('');
   const ListCount = useListCount(0);
   const nowdate = dayjs(Date(), 'YYYY-MM-DD HH:mm:ss.SSS');
@@ -144,4 +144,4 @@ function FollowerList(props: Feed) {
     </>
   );
 }
-export default FollowerList;
+export default Feed;

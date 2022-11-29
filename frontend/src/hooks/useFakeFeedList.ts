@@ -9,7 +9,7 @@ const prevDate: string = dayjs().subtract(1, 'month').format(DATE_FORMAT);
 export default function useFakeFeedList() {
   const feedList: Array<Feed> = [];
 
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < 20; i++) {
     feedList.push({
       userId: faker.internet.userName(),
       userName: faker.internet.userName(),
