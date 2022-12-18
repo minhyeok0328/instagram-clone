@@ -1,10 +1,11 @@
 version: '3'
 
 services:
-  database:
-    image: mariadb:latest
+  mariadb:
+    image: mariadb:10
+    container_name: mariadb
     ports:
-      - 3306:3306
+      - '3306:3306'
     expose:
       - 3306
     volumes:
@@ -17,6 +18,19 @@ services:
     networks:
       - default
     restart: always
+
+  redis:
+    image: redis:7
+    container_name: redis
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+    labels:
+      - 'name=redis'
+      - 'mode=standalone'
+    ports:
+      - '6379:6379'
+    networks:
+      - default
 
 networks:
   default:

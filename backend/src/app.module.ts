@@ -1,20 +1,14 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { APP_FILTER } from '@nestjs/core';
-import { NotFoundExceptionFilter } from './filter/not-found-exception-filter';
-import { GraphqlModule } from './graphql/graphql.module';
 import { DatabaseModule } from './database/database.module';
+import { GraphqlModule } from './graphql/graphql.module';
+import { CacheModule } from './cache/cache.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [GraphqlModule, DatabaseModule],
+  imports: [DatabaseModule, GraphqlModule, CacheModule, AuthModule],
   controllers: [AppController],
-  providers: [
-    AppService,
-    {
-      provide: APP_FILTER,
-      useClass: NotFoundExceptionFilter,
-    },
-  ],
+  providers: [AppService],
 })
 export class AppModule {}

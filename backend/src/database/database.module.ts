@@ -1,18 +1,25 @@
 import { Module } from '@nestjs/common';
-import { SequelizeModule } from '@nestjs/sequelize';
-import { Member } from './models/member.model';
-import { Feed } from './models/feed.model';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { User } from '@user/entities/user.entity';
 
 @Module({
   imports: [
-    SequelizeModule.forRoot({
-      dialect: 'mariadb',
+    TypeOrmModule.forRoot({
+      type: 'mariadb',
       host: 'localhost',
       port: 3306,
-      username: 'user',
-      password: '1234',
+      username: 'root',
+      password: 'root',
       database: 'instagram',
-      models: [Member, Feed],
+      entities: [User],
+      synchronize: process.env.NODE_ENV !== 'production',
+      cache: {
+        type: 'redis',
+        options: {
+          host: 'localhost',
+          port: 6379,
+        },
+      },
     }),
   ],
 })

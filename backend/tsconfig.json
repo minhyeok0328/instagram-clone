@@ -16,6 +16,20 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@user/*": [
+        "./src/graphql/user/*"
+      ],
+      "@database/*": [
+        "./src/database/*"
+      ],
+      "@cache/*": [
+        "./src/cache/*"
+      ],
+      "@auth/*": [
+        "./src/auth/*"
+      ]
+    }
   }
 }
